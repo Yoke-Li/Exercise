@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img1{
+            width: 92px;
+            height: 130px;
+        }
+        table{
+            width: 600px;
+            height: 400px;
+            text-align: center;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+        thead tr{
+            background-color: rgb(162, 162, 162);
+            height: 50px;
+        }
+        tbody tr:nth-child(even){
+            background-color: rgb(225, 225, 225);
+        }
+        th,td{
+            border: 1px solid black; 
+        }
+        #img1{
+            width: 184px;
+            height: 260px;
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <th>选项</th>
+                <th>编号</th>
+                <th>封面</th>
+                <th>购书人</th>
+                <th>性别</th>
+                <th>购书价</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="can">
+                <td><input type="checkbox" class="inp" /></td>
+                <td>1001</td>
+                <td><img class="img1" src="../../image/01.jpg"></td>
+                <td>李晓明</td>
+                <td>男</td>
+                <td>35.60元</td>
+            </tr>
+            <tr class="can">
+                <td><input type="checkbox" class="inp" /></td>
+                <td>1002</td>
+                <td><img class="img1" src="../../image/02.jpg"></td>
+                <td>刘明明</td>
+                <td>女</td>
+                <td>37.80元</td>
+            </tr>
+            <tr class="can">
+                <td><input type="checkbox" class="inp" /></td>
+                <td>1003</td>
+                <td><img class="img1" src="../../image/03.jpg"></td>
+                <td>张晓星</td>
+                <td>女</td>
+                <td>45.60元</td>
+            </tr>
+            <tr>
+                <td colspan="6" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="quan" type="checkbox" value="全选"/>全选&nbsp;&nbsp;
+                    <button>删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <img id="img1" src="../../image/01.jpg" />
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script>
+    var dom = $('.inp');
+    var tr = $('.can');
+    var quan = $('#quan');
+    var imgs = $('.img1');
+    var img1 = $('#img1');
+    $('button').click(function(){
+        for (var i in dom){
+            if(dom[i].checked)
+                tr[i].remove();
+        }
+    })
+
+    $(quan).change(function(){
+        if(this.checked)
+        {
+            $('.inp[type=checkbox]').attr('checked',true);
+        }
+        else{
+            $('.inp[type=checkbox]').attr('checked',false);
+        }
+    })
+
+    var x = 5,y = 5;
+    $('table img').mouseover(function(e){
+        $(img1)
+        .attr("src",$(this).attr('src'))
+        .fadeIn(500)
+        .css({top:(e.pageY+y)+'px',left:(e.pageX+x)+'px'});
+        console.log($(this).attr('src'));
+    })
+    $('table img').mouseout(function(){
+        $(img1).fadeOut(500);
+    })
+</script>
+</html>
